@@ -1,10 +1,10 @@
 **Few Snapshot to Increase Curiosity🤔**
 
 <div align="center">
-  <img src="V1.1/Data/test1.png" alt="Upside down dinosaur" width="300" height="300"/>
-  <img src="V1.1/Data/test2.png" alt="bulb" width="300" height="300"/>
-  <img src="V1.1/Data/test3.png" alt="Racoon on tractor" width="300" height="300"/>
-  <img src="V1.1/Data/output.png" alt="Racoon on tractor" width="300" height="300"/>
+  <img src="Data/test1.png" alt="Upside down dinosaur" width="300" height="300"/>
+  <img src="Data/test2.png" alt="bulb" width="300" height="300"/>
+  <img src="Data/test3.png" alt="Racoon on tractor" width="300" height="300"/>
+  <img src="Data/output.png" alt="output" width="300" height="300"/>
 
 </div>
 
