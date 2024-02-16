@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Draw and Compare</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+        cursor: crosshair;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Draw: {{ prompt }}</h1>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <br />
+    <button onclick="clearCanvas()">Clear</button>
+    <button onclick="submitDrawing()">Submit</button>
+
+    <form id="form" action="/compare" method="POST" style="display: none">
+      <input type="hidden" name="userImage" id="userImage" />
+      <input type="hidden" name="prompt" value="{{ prompt }}" />
+      <input type="submit" />
+    </form>
+
+    <script>
+      var canvas = document.getElementById("canvas")
+      var ctx = canvas.getContext("2d")
+
+      var drawing = false
+      var prevX = 0
+      var currX = 0
+      var prevY = 0
+      var currY = 0
+      var dot_flag = false
+
+      canvas.addEventListener(
+        "mousemove",
+        function (e) {
+          findxy("move", e)
+        },
+        false
+      )
+      canvas.addEventListener(
+        "mousedown",
+        function (e) {
+          findxy("down", e)
+        },
+        false
+      )
+      canvas.addEventListener(
+        "mouseup",
+        function (e) {
+          findxy("up", e)
+        },
+        false
+      )
+      canvas.addEventListener(
+        "mouseout",
+        function (e) {
+          findxy("out", e)
+        },
+        false
+      )
+
+      function draw() {
+        ctx.beginPath()
+        ctx.moveTo(prevX, prevY)
+        ctx.lineTo(currX, currY)
+        ctx.strokeStyle = "black"
+        ctx.lineWidth = 2
+        ctx.stroke()
+        ctx.closePath()
+      }
+
+      function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+      }
+
+      function findxy(res, e) {
+        if (res == "down") {
+          prevX = currX
+          prevY = currY
+          currX = e.clientX - canvas.getBoundingClientRect().left
+          currY = e.clientY - canvas.getBoundingClientRect().top
+
+          drawing = true
+          dot_flag = true
+          if (dot_flag) {
+            ctx.beginPath()
+            ctx.fillStyle = "black"
+            ctx.fillRect(currX, currY, 2, 2)
+            ctx.closePath()
+            dot_flag = false
+          }
+        }
+        if (res == "up" || res == "out") {
+          drawing = false
+        }
+        if (res == "move") {
+          if (drawing) {
+            prevX = currX
+            prevY = currY
+            currX = e.clientX - canvas.getBoundingClientRect().left
+            currY = e.clientY - canvas.getBoundingClientRect().top
+            draw()
+          }
+        }
+      }
+
+      function submitDrawing() {
+        var dataURL = canvas.toDataURL()
+        document.getElementById("userImage").value = dataURL
+        document.getElementById("form").submit()
+      }
+    </script>
+  </body>
+</html>
