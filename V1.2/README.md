@@ -13,13 +13,13 @@ This Flask web application allows users to draw an image based on a given prompt
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your_username/flask-clip-app.git
+    git clone https://github.com/mayuras7685/Starknet-submission.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd flask-clip-app
+    cd V1.2
     ```
 
 3. Install the required dependencies using pip:
@@ -31,7 +31,7 @@ This Flask web application allows users to draw an image based on a given prompt
 4. Run the Flask application:
 
     ```bash
-    python app.py
+    python main.py
     ```
 
 5. Access the web application in your browser at `http://localhost:5000`.
